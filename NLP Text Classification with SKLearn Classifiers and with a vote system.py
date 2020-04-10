@@ -17,6 +17,7 @@ from sklearn.svm import SVC, LinearSVC, NuSVC
 from nltk.classify import ClassifierI
 from statistics import mode
 
+#making class for the vote system and to define confidence percentage
 
 class VoteClassifier(ClassifierI):
     def __init__(self, *classifiers):
@@ -95,7 +96,7 @@ classifier = nltk.NaiveBayesClassifier.train(training_set)   #making classifier 
 print("Original Naive Bayes Algo Accuray percent:", (nltk.classify.accuracy(classifier, testing_set))*100) #prining the accuracy of testing set
 classifier.show_most_informative_features(15) #getting first 15 most informative features
 
-
+#then 6 other classifier has been made to classify.
 
 MNB_classifier = SklearnClassifier(MultinomialNB())
 MNB_classifier.train(training_set)
@@ -131,13 +132,13 @@ NuSVC_classifier = SklearnClassifier(NuSVC())
 NuSVC_classifier.train(training_set)
 print("NuSVC_classifier Algo Accuray percent:", (nltk.classify.accuracy(NuSVC_classifier, testing_set))*100)
 
-
+#making the voted_classifier to get the classifier with best results
 
 voted_classifier = VoteClassifier(classifier, MNB_classifier, BNB_classifier, LogisticRegression_classifier, LinearSVC_classifier, 
                                  SGDClassifier_classifier, NuSVC_classifier)
 print("voted_classifier Algo Accuray percent:", (nltk.classify.accuracy(voted_classifier, testing_set))*100)
 
-
+#printing the confidence percentage for defferent classifiers
 
 print("classification:", voted_classifier.classify(testing_set[0][0]), "confidence%:", voted_classifier.confidence(testing_set[0][0])*100)
 print("classification:", voted_classifier.classify(testing_set[1][0]), "confidence%:", voted_classifier.confidence(testing_set[1][0])*100)
