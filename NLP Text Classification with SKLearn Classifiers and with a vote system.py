@@ -140,7 +140,7 @@ print("voted_classifier Algo Accuray percent:", (nltk.classify.accuracy(voted_cl
 
 #printing the confidence percentage for defferent classifiers
 
-print("classification:", voted_classifier.classify(testing_set[0][0]), "confidence%:", voted_classifier.confidence(testing_set[0][0])*100)
+print("classification:", voted_classifier.classify(testing_set[0][0]), "confidence%:", voted_classifier.confidence(testing_set[0][0])*100)     #printing the confidence for the classifier
 print("classification:", voted_classifier.classify(testing_set[1][0]), "confidence%:", voted_classifier.confidence(testing_set[1][0])*100)
 print("classification:", voted_classifier.classify(testing_set[2][0]), "confidence%:", voted_classifier.confidence(testing_set[2][0])*100)
 print("classification:", voted_classifier.classify(testing_set[3][0]), "confidence%:", voted_classifier.confidence(testing_set[3][0])*100)
