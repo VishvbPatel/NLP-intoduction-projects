@@ -20,6 +20,7 @@ from sklearn.svm import SVC, LinearSVC, NuSVC
 from nltk.classify import ClassifierI
 from statistics import mode
 import io
+from nltk.tokenize import word_tokenize
 
 
 # In[2]:
@@ -57,11 +58,11 @@ short_neg = io.open("/Users/vishvmac/Machine Learning/Machine learning projects/
 # In[23]:
 
 
-Documents = []
+documents = []
 for r in short_pos.split('\n'):
-    documents.append((r,'\n'))
+    documents.append((r,"pos"))
 for r in short_neg.split('\n'):
-    documents.append((r,'\n'))
+    documents.append((r,"neg"))
 
 
 # In[ ]:
@@ -94,18 +95,18 @@ all_words = nltk.FreqDist(all_words) #making a frequency distribution of all the
 # In[7]:
 
 
-word_features = list(all_words.keys())[:3000] #making list of the first 3000 high frequency words 
+word_features = list(all_words.keys())[:5000] #making list of the first 3000 high frequency words 
 
 
 # In[8]:
 
 
 def find_features(document):
-    words = set(document)
+    words = word_tokenize(document)
     features = {}
     for w in word_features:
         features[w] = (w in words)
-    return features                  #making a list of words with the tag whether they are present in the word_features list or not
+    return features                    #making a list of words with the tag whether they are present in the word_features list or not
 
 
 # In[9]:
@@ -117,8 +118,8 @@ featuresets = [(find_features(rev), category) for (rev, category) in documents] 
 # In[10]:
 
 
-training_set = featuresets[:1900]  #training set
-testing_set = featuresets[1900:]   #testing set
+training_set = featuresets[:10000]  #training set
+testing_set = featuresets[10000:]   #testing set
 
 
 # In[11]:
